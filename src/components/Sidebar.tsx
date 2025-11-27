@@ -1,11 +1,24 @@
-import { Users, Building2, Gift, Ticket, LayoutDashboard, Rss, Megaphone, BarChart3 } from "lucide-react";
+"use client";
+
+import {
+  Users,
+  Building2,
+  Gift,
+  Ticket,
+  LayoutDashboard,
+  Rss,
+  Megaphone,
+  BarChart3,
+} from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle"; 
 
 interface SidebarProps {
   activeSection: string;
   onNavigate: (section: string) => void;
+  isOpen?: boolean; 
 }
 
-export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
+export function Sidebar({ activeSection, onNavigate, isOpen = true }: SidebarProps) {
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "users", label: "Users", icon: Users },
@@ -18,27 +31,31 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
   ];
 
   return (
-    <div className="w-64 bg-sidebar border-r border-sidebar-border h-screen fixed left-0 top-0 flex flex-col">
-      <div className="p-6 border-b border-sidebar-border">
-        <h1 className="text-primary">CRCL Admin</h1>
-        <p className="text-muted-foreground text-sm mt-1">Saudi Arabia</p>
+    <div
+      className={`
+        w-64 bg-sidebar border-r border-sidebar-border h-screen fixed left-0 top-0
+        flex flex-col transition-transform duration-300 z-40
+        ${isOpen ? "translate-x-0" : "-translate-x-64"} lg:translate-x-0
+      `}
+    >
+      <div className="px-2 border-b border-sidebar-border">
+       <h1 className="sidebar-logo" />
       </div>
-      
-      <nav className="flex-1 p-4">
-        <ul className="space-y-2">
+
+      <nav className="flex-1 p-4 overflow-y-auto">
+        <ul className="space-y-2 mb-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
-            
+
             return (
               <li key={item.id}>
                 <button
                   onClick={() => onNavigate(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    isActive
+                  className={`w-full flex items-center gap-3 px-4 py-3 cursor-pointer rounded-lg text-sm transition-colors ${isActive
                       ? "bg-primary text-primary-foreground"
                       : "text-sidebar-foreground hover:bg-sidebar-accent"
-                  }`}
+                    }`}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
@@ -47,9 +64,11 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
             );
           })}
         </ul>
+        <ThemeToggle />
       </nav>
-      
-      <div className="p-4 border-t border-sidebar-border">
+
+      <div className="p-4 border-t border-sidebar-border space-y-3">
+
         <p className="text-xs text-muted-foreground">© 2025 Private CRCL</p>
       </div>
     </div>

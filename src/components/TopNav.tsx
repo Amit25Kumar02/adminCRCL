@@ -7,14 +7,14 @@ interface TopNavProps {
 
 export function TopNav({ onLogout }: TopNavProps) {
   return (
-    <div className="h-16 bg-card border-b border-border flex items-center justify-between px-8">
+    <div className="h-16 bg-card border-b border-border flex items-center justify-between px-8 ">
       <div>
         <h2>Admin Dashboard</h2>
       </div>
       
       <div className="flex items-center gap-4">
         <button className="relative p-2 hover:bg-muted rounded-lg transition-colors">
-          <Bell className="w-5 h-5" />
+          <Bell className="w-5 h-5 cursor-pointer"  />
           <Badge className="absolute -top-1 -right-1 bg-primary text-primary-foreground w-5 h-5 flex items-center justify-center p-0 text-xs">
             3
           </Badge>
@@ -25,14 +25,14 @@ export function TopNav({ onLogout }: TopNavProps) {
             <p className="text-sm">Admin User</p>
             <p className="text-xs text-muted-foreground">admin@crcl.sa</p>
           </div>
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-            <User className="w-5 h-5 text-primary-foreground" />
+          <div className="w-10 h-10 bg-primary rounded-full cursor-pointer flex items-center justify-center">
+            <User className="w-5 h-5 text-primary-foreground " />
           </div>
         </div>
         
         <button 
           onClick={onLogout}
-          className="p-2 hover:bg-muted rounded-lg transition-colors text-muted-foreground hover:text-foreground"
+          className="p-2 hover:bg-muted rounded-lg cursor-pointer transition-colors text-muted-foreground hover:text-foreground"
           title="Sign out"
         >
           <LogOut className="w-5 h-5" />

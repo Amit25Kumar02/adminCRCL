@@ -108,7 +108,7 @@ export function UsersManagement() {
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
-                          <Button variant="outline" size="sm" className="border-border">
+                          <Button variant="outline" size="sm" className="border-border cur">
                             <Eye className="w-4 h-4 mr-1" />
                             View
                           </Button>

@@ -122,7 +122,7 @@ export function AnnouncementsManagement() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 ">
       <div className="flex items-center justify-between">
         <div>
           <h1>Announcements Management</h1>
@@ -130,7 +130,7 @@ export function AnnouncementsManagement() {
         </div>
         <Dialog open={isAddAnnouncementOpen} onOpenChange={setIsAddAnnouncementOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer">
               <Plus className="w-4 h-4 mr-2" />
               Create Announcement
             </Button>
@@ -149,7 +149,7 @@ export function AnnouncementsManagement() {
                   id="title"
                   placeholder="e.g., Platform Update"
                   value={newAnnouncement.title}
-                  onChange={(e) => setNewAnnouncement({...newAnnouncement, title: e.target.value})}
+                  onChange={(e) => setNewAnnouncement({ ...newAnnouncement, title: e.target.value })}
                   className="bg-muted border-border"
                 />
               </div>
@@ -159,14 +159,14 @@ export function AnnouncementsManagement() {
                   id="message"
                   placeholder="Write your announcement message..."
                   value={newAnnouncement.message}
-                  onChange={(e) => setNewAnnouncement({...newAnnouncement, message: e.target.value})}
+                  onChange={(e) => setNewAnnouncement({ ...newAnnouncement, message: e.target.value })}
                   className="bg-muted border-border min-h-32"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="priority">Priority</Label>
-                  <Select value={newAnnouncement.priority} onValueChange={(value) => setNewAnnouncement({...newAnnouncement, priority: value})}>
+                  <Select value={newAnnouncement.priority} onValueChange={(value) => setNewAnnouncement({ ...newAnnouncement, priority: value })}>
                     <SelectTrigger className="bg-muted border-border">
                       <SelectValue placeholder="Select priority" />
                     </SelectTrigger>
@@ -179,7 +179,7 @@ export function AnnouncementsManagement() {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="targetAudience">Target Audience</Label>
-                  <Select value={newAnnouncement.targetAudience} onValueChange={(value) => setNewAnnouncement({...newAnnouncement, targetAudience: value})}>
+                  <Select value={newAnnouncement.targetAudience} onValueChange={(value) => setNewAnnouncement({ ...newAnnouncement, targetAudience: value })}>
                     <SelectTrigger className="bg-muted border-border">
                       <SelectValue placeholder="Select audience" />
                     </SelectTrigger>
@@ -198,7 +198,7 @@ export function AnnouncementsManagement() {
                   id="scheduledDate"
                   type="datetime-local"
                   value={newAnnouncement.scheduledDate}
-                  onChange={(e) => setNewAnnouncement({...newAnnouncement, scheduledDate: e.target.value})}
+                  onChange={(e) => setNewAnnouncement({ ...newAnnouncement, scheduledDate: e.target.value })}
                   className="bg-muted border-border"
                 />
                 <p className="text-xs text-muted-foreground">
@@ -215,7 +215,7 @@ export function AnnouncementsManagement() {
                 <Switch
                   id="pushNotification"
                   checked={newAnnouncement.pushNotification}
-                  onCheckedChange={(checked) => setNewAnnouncement({...newAnnouncement, pushNotification: checked})}
+                  onCheckedChange={(checked) => setNewAnnouncement({ ...newAnnouncement, pushNotification: checked })}
                 />
               </div>
             </div>
@@ -293,81 +293,85 @@ export function AnnouncementsManagement() {
         </div>
       </Card>
 
-      <Card className="bg-card border-border overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow className="border-border hover:bg-transparent">
-              <TableHead>Title</TableHead>
-              <TableHead>Priority</TableHead>
-              <TableHead>Target Audience</TableHead>
-              <TableHead>Created Date</TableHead>
-              <TableHead>Scheduled</TableHead>
-              <TableHead>Views</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {announcements
-              .filter(announcement => 
-                announcement.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                announcement.message.toLowerCase().includes(searchTerm.toLowerCase())
-              )
-              .map((announcement) => (
-                <TableRow key={announcement.id} className="border-border">
-                  <TableCell>
-                    <div>
-                      <p>{announcement.title}</p>
-                      <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
-                        {announcement.message}
-                      </p>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge 
-                      variant={announcement.priority === "High" ? "default" : "secondary"}
-                      className={announcement.priority === "High" ? "bg-primary text-primary-foreground" : ""}
-                    >
-                      {announcement.priority}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">{announcement.targetAudience}</TableCell>
-                  <TableCell className="text-muted-foreground">{announcement.createdDate}</TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {announcement.scheduledDate || "-"}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {announcement.views > 0 && <Eye className="w-4 h-4 text-muted-foreground" />}
-                      <span>{announcement.views.toLocaleString()}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge 
-                      variant={announcement.status === "Sent" ? "default" : "secondary"}
-                      className={announcement.status === "Sent" ? "bg-primary text-primary-foreground" : ""}
-                    >
-                      {announcement.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <Button variant="outline" size="sm" className="border-border">
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="border-border text-destructive hover:bg-destructive hover:text-destructive-foreground"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
+      <Card className="bg-card  border-border ">
+        <div className="overflow-x-auto">
+          <div className="w-full max-w-[100px] md:max-w-full">
+            <Table className="min-w-[700px] w-full">
+              <TableHeader>
+                <TableRow className="border-border hover:bg-transparent">
+                  <TableHead>Title</TableHead>
+                  <TableHead>Priority</TableHead>
+                  <TableHead>Target Audience</TableHead>
+                  <TableHead>Created Date</TableHead>
+                  <TableHead>Scheduled</TableHead>
+                  <TableHead>Views</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+              </TableHeader>
+              <TableBody >
+                {announcements
+                  .filter(announcement =>
+                    announcement.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    announcement.message.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                  .map((announcement) => (
+                    <TableRow key={announcement.id} className="border-border">
+                      <TableCell >
+                        <div >
+                          <p>{announcement.title}</p>
+                          <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                            {/* {announcement.message} */}
+                          </p>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={announcement.priority === "High" ? "default" : "secondary"}
+                          className={announcement.priority === "High" ? "bg-primary text-primary-foreground" : ""}
+                        >
+                          {announcement.priority}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">{announcement.targetAudience}</TableCell>
+                      <TableCell className="text-muted-foreground">{announcement.createdDate}</TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {announcement.scheduledDate || "-"}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          {announcement.views > 0 && <Eye className="w-4 h-4 text-muted-foreground" />}
+                          <span>{announcement.views.toLocaleString()}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={announcement.status === "Sent" ? "default" : "secondary"}
+                          className={announcement.status === "Sent" ? "bg-primary text-primary-foreground" : ""}
+                        >
+                          {announcement.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
+                          <Button variant="outline" size="sm" className="border-border">
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-border text-destructive hover:bg-destructive hover:text-destructive-foreground"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
       </Card>
 
       <div className="flex items-center justify-between">
