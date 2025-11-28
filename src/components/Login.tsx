@@ -37,45 +37,44 @@ export function Login({ onLogin }: LoginProps) {
   return (
     <div className="dark min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
-            <Lock className="w-8 h-8 text-primary-foreground" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex justify-center">
+            <h1 className="sidebar-logo" />
           </div>
-          <h1>CRCL Admin</h1>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-muted-foreground mt-2 text-sm sm:text-base">
             Sign in to access the admin dashboard
           </p>
         </div>
 
-        <Card className="p-8 bg-card border-border">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <Card className="p-6 sm:p-8 bg-card border-border">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
+              <Label htmlFor="email" className="text-sm sm:text-base">Email Address</Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
                   placeholder="admin@crcl.sa"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 bg-muted border-border"
+                  className="pl-10 sm:pl-12 bg-muted border-border text-sm sm:text-base h-10 sm:h-11"
                   required
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-sm sm:text-base">Password</Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10 bg-muted border-border"
+                  className="pl-10 sm:pl-12 pr-10 sm:pr-12 bg-muted border-border text-sm sm:text-base h-10 sm:h-11"
                   required
                 />
                 <button
@@ -84,9 +83,9 @@ export function Login({ onLogin }: LoginProps) {
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
+                    <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" />
                   ) : (
-                    <Eye className="w-5 h-5" />
+                    <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
                   )}
                 </button>
               </div>
@@ -98,7 +97,7 @@ export function Login({ onLogin }: LoginProps) {
               </div>
             )}
 
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="remember"
@@ -107,14 +106,14 @@ export function Login({ onLogin }: LoginProps) {
                 />
                 <label
                   htmlFor="remember"
-                  className="text-sm cursor-pointer select-none"
+                  className="text-xs sm:text-sm cursor-pointer select-none"
                 >
                   Remember me
                 </label>
               </div>
               <button
                 type="button"
-                className="text-sm text-primary hover:underline"
+                className="text-xs sm:text-sm text-primary hover:underline text-left sm:text-right"
               >
                 Forgot password?
               </button>
@@ -122,7 +121,7 @@ export function Login({ onLogin }: LoginProps) {
 
             <Button
               type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-10 sm:h-11 text-sm sm:text-base"
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign In"}
@@ -136,13 +135,13 @@ export function Login({ onLogin }: LoginProps) {
           </div>
         </Card>
 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-4 sm:mt-6 text-center">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             © 2025 Private CRCL. All rights reserved.
           </p>
         </div>
 
-        <div className="mt-8 p-4 bg-muted/30 rounded-lg border border-border">
+        <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-muted/30 rounded-lg border border-border">
           <p className="text-xs text-muted-foreground mb-2">
             <strong>Demo Credentials:</strong>
           </p>

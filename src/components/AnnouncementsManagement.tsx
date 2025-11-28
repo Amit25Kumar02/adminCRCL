@@ -293,10 +293,10 @@ export function AnnouncementsManagement() {
         </div>
       </Card>
 
-      <Card className="bg-card  border-border ">
-        <div className="overflow-x-auto">
-          <div className="w-full max-w-[100px] md:max-w-full">
-            <Table className="min-w-[700px] w-full">
+      <div className="grid grid-cols-1  gap-6">
+        <div className="w-full">
+          <Card className="bg-card border-border overflow-hidden">
+            <Table>
               <TableHeader>
                 <TableRow className="border-border hover:bg-transparent">
                   <TableHead>Title</TableHead>
@@ -321,7 +321,7 @@ export function AnnouncementsManagement() {
                         <div >
                           <p>{announcement.title}</p>
                           <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                            {/* {announcement.message} */}
+                            {announcement.message}
                           </p>
                         </div>
                       </TableCell>
@@ -370,9 +370,9 @@ export function AnnouncementsManagement() {
                   ))}
               </TableBody>
             </Table>
-          </div>
+          </Card>
         </div>
-      </Card>
+      </div>
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
